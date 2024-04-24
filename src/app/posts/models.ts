@@ -1,6 +1,6 @@
 export interface ParamProps {
   params?: { [key: string]: string };
-  searchParams?:{ [key: string]: string | undefined };
+  searchParams?:{ [key: string]: string };
 }
 
 export interface Post {
