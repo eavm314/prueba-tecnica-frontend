@@ -6,7 +6,7 @@ const nextConfig = {
         source: '/',
         destination: '/posts',
         permanent: true,
-      },
+      }
     ];
   }
 };
