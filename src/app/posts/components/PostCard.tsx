@@ -9,12 +9,11 @@ interface PostCardProps {
 
 const PostCard: FC<PostCardProps> = ({ post, inList }) => {
   return (
-    <div className="" >
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
-      {
-        inList && <Link href={`posts/${post.id}`}>View Post</Link>
-      }
+    <div className={`${inList && "hover:bg-slate-200"} p-2 w-full`}>
+      <h2 className={'text-xl font-semibold '+(!inList && "text-2xl")}>
+        {post.title}
+      </h2>
+      <p className={`${inList && "overflow-ellipsis overflow-hidden whitespace-nowrap"}`}>{post.body}</p>
     </div>
   );
 };

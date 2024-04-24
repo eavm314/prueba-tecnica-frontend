@@ -7,9 +7,9 @@ interface CommentCardProps {
 
 const CommentCard: FC<CommentCardProps> = ({ comment }) => {
   return (
-    <div className="" >
-      <h2>{comment.name}</h2>
-      <h3>{comment.email}</h3>
+    <div className="p-2" >
+      <h2 className='text-lg font-semibold'>{comment.name}</h2>
+      <h3 className='text-sm'>{comment.email}</h3>
       <p>{comment.body}</p>
     </div>
   );

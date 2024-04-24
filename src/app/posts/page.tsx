@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import PostCard from './components/PostCard';
-import { ParamProps, Post } from './models';
-import { API_URL, SearchParamsKeys } from './constants';
 import Link from 'next/link';
+import { FC } from 'react';
 import { toNumberParam } from '../utils';
 import { Filters } from './components/Filters';
+import PostCard from './components/PostCard';
+import { API_URL, SearchParamsKeys } from './constants';
+import { ParamProps, Post } from './models';
 
 const PostsPage: FC<ParamProps> = async ({ searchParams }) => {
   const page = toNumberParam(searchParams?.[SearchParamsKeys.PAGE], 1);
@@ -47,28 +47,38 @@ const PostsPage: FC<ParamProps> = async ({ searchParams }) => {
   const posts = await fetchPosts();
 
   return (
-    <div>
-      <div>
-        <h2>Filters</h2>
-        { (title || content) && <Link href="/posts">Reset</Link>}
+    <div className='my-4'>
+      <div className='flex flex-col items-center'>
+        <h1 className='text-4xl font-bold'>JSON Posts Visualizer</h1>
         <Filters title={title} content={content} />
       </div>
-      <div>
-        { posts.length > 0 ?
-        posts.map((post: any) => (
-          <PostCard key={post.id} post={post} inList />
-        )) :
-        <div>No results</div>
-      }
+
+      <div className='flex flex-col divide-y-2 m-6'>
+        {posts.length > 0 ?
+          posts.map((post) => (
+            <Link key={post.id} href={`posts/${post.id}`}>
+              <PostCard post={post} inList />
+            </Link>
+          )) :
+          <div>No results</div>
+        }
       </div>
-      {
-        page > 1 &&
-        <Link href={`?${prevSearchParams.toString()}`}>Prev</Link>
-      }
-      {
-        posts.length == 10 &&
-        <Link href={`?${nextSearchParams.toString()}`}>Next</Link>
-      }
+      <div className='flex gap-6 justify-center'>
+        {
+          page > 1 &&
+          <Link className='bg-black text-gray-100 p-2 rounded-xl w-32 text-center'
+            href={`?${prevSearchParams.toString()}`}>
+            ⬅️ Anterior
+          </Link>
+        }
+        {
+          posts.length == 10 &&
+          <Link className='bg-black text-gray-100 p-2 rounded-xl w-32 text-center'
+            href={`?${nextSearchParams.toString()}`}>
+            Siguiente ➡️
+          </Link>
+        }
+      </div>
     </div>
   );
 };

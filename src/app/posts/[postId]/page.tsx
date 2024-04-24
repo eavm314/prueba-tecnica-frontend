@@ -33,17 +33,19 @@ const SinglePostPage: FC<ParamProps> = async ({ params }) => {
 
   const post = await fetchPost();
   return (
-    <div>
+    <div className="flex flex-col items-center m-4">
       {
         post &&
         <PostCard post={post} />
       }
 
-      <h2>Comments</h2>
-      <div>
-        {comments.map((comment) => (
-          <CommentCard key={comment.id} comment={comment} />
-        ))}
+      <div className="mx-10 mt-4">
+        <h2 className="font-bold text-2xl">Comments</h2>
+        <div>
+          {comments.map((comment) => (
+            <CommentCard key={comment.id} comment={comment} />
+          ))}
+        </div>
       </div>
     </div>
   )
